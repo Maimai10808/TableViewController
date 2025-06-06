@@ -23,15 +23,22 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell
-            if indexPath.row % 2 == 0 {
-                cell = tableView.dequeueReusableCell(withIdentifier: "ShoppingBasicCell", for: indexPath)
-                cell.textLabel?.text = "基本购物项目"
-            } else {
-                cell = tableView.dequeueReusableCell(withIdentifier: "ShoppingSubitleCell", for: indexPath)
-                cell.textLabel?.text = "子标题购物项目"
-            }
-            return cell
+       let  cell = tableView.dequeueReusableCell(withIdentifier: "ShoppingSubitleCell", for: indexPath)
+        
+        if #available(iOS 14, *) {
+            var content = cell.defaultContentConfiguration()
+            content.text = "Shopping Subtitle Item"
+            content.secondaryText = "Shopping Subtitle Description"
+            content.image = UIImage(systemName: "star.fill")
+            cell.contentConfiguration = content
+        } else {
+            
+            
+            cell.textLabel?.text = "Shopping Subtitle Item"
+            cell.detailTextLabel?.text = "Shopping Subtitle Description"
+            cell.imageView?.image = UIImage(systemName: "star.fill")
+        }
+           return cell
     }
 
 
