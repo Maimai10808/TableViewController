@@ -43,6 +43,15 @@ class ViewController: UITableViewController {
         ShoppingItem(title: "Strawberry", subTitle: "Buy 1 box of strawberries"),
         ShoppingItem(title: "Watermelon", subTitle: "Buy a watermelon") // 近似替代
     ]
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "shoppingItemDetailSegue" {
+            let destinationVC = segue.destination as! ShoppingItemDetailViewController
+            let shoppingItem = sender as! ShoppingItem
+            destinationVC.shoppingItem = shoppingItem
+            
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,12 +97,15 @@ class ViewController: UITableViewController {
 //    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("did tap row")
-        shoppingItems[indexPath.row].isSelected.toggle()
-//        shoppingItems[indexPath.row].isSelected = !shoppingItems[indexPath.row].isSelected
-        tableView.reloadData()
+//        print("did tap row")
+//        shoppingItems[indexPath.row].isSelected.toggle()
+////        shoppingItems[indexPath.row].isSelected = !shoppingItems[indexPath.row].isSelected
+//        tableView.reloadData()
+        
+        let shoppingItem = shoppingItems[indexPath.row]
+        performSegue(withIdentifier: "shoppingItemDetailSegue", sender: shoppingItem)
+        
     }
-
 
 }
 
