@@ -44,12 +44,15 @@ class ViewController: UITableViewController {
         ShoppingItem(title: "Watermelon", subTitle: "Buy a watermelon") // 近似替代
     ]
     
+    // 自动调用
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "shoppingItemDetailSegue" {
+            // 获取目标页
             let destinationVC = segue.destination as! ShoppingItemDetailViewController
+            // 拿到要传的数据
             let shoppingItem = sender as! ShoppingItem
+            // 赋值
             destinationVC.shoppingItem = shoppingItem
-            
         }
     }
 
